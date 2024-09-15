@@ -8,6 +8,9 @@
 - `go build cmd/main.go`  
 - `./main`  
 
+If the application is launched for the first time, you need to apply migrations to the database:  
+`goose -dir . postgres "postgresql://postgres:12345@127.0.0.1:5432/postgres?sslmode=disable" up`
+
 ### Launching an application from docker-compose:
 - Edit in the config.yml file "postgres: host: "postgresql"", "redis: host: "redis"";  
 - Select "main" in the file.go" reading configuration from "config.yml";  
