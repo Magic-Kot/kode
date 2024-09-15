@@ -1,4 +1,3 @@
 *.exe
-private.env
 .idea/
 data/
