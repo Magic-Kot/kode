@@ -1,0 +1,32 @@
+server:
+    host: "localhost"
+    port: ":8080"
+    timeout: 5s
+
+postgres:
+    maxAttempts: 4
+    delay: 10s
+    username: "postgres"
+    password: "12345"
+    host: "postgresql" # Local: 127.0.0.1, Docker: postgresql
+    port: "5432"
+    database: "postgres"
+    SSLMode: "disable"
+
+redis:
+    username: "reds"
+    password: ""
+    host: "redis" # Local: 127.0.0.1, Docker: redis
+    port: "6379"
+    database: "0"
+
+logger:
+    logLevel: "debug"
+
+auth:
+    signingKey: "hs1dfjKhl0iLLLhfjH7"
+    accessTokenTTL: 2h
+    refreshTokenTTL: 4h
+
+speller:
+    url: "https://speller.yandex.net/services/spellservice.json/checkTexts"
