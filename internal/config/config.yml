@@ -8,7 +8,7 @@ postgres:
     delay: 10s
     username: "postgres"
     password: "12345"
-    host: "127.0.0.1" # Local: 127.0.0.1, Docker: postgresql
+    host: "postgresql" # Local: 127.0.0.1, Docker: postgresql
     port: "5432"
     database: "postgres"
     SSLMode: "disable"
@@ -16,7 +16,7 @@ postgres:
 redis:
     username: "reds"
     password: ""
-    host: "127.0.0.1" # Local: 127.0.0.1, Docker: redis
+    host: "redis" # Local: 127.0.0.1, Docker: redis
     port: "6379"
     database: "0"
 

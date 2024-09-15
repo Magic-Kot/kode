@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"time"
 
 	"github.com/Magic-Kot/code/internal/config"
 	"github.com/Magic-Kot/code/internal/controllers"
@@ -16,20 +17,23 @@ import (
 	"github.com/Magic-Kot/code/pkg/client/reds"
 	"github.com/Magic-Kot/code/pkg/httpserver"
 	"github.com/Magic-Kot/code/pkg/logging"
+	"github.com/Magic-Kot/code/pkg/ossignal"
 	"github.com/Magic-Kot/code/pkg/speller"
 	"github.com/Magic-Kot/code/pkg/utils/jwt_token"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/ilyakaznacheev/cleanenv"
 	_ "github.com/lib/pq"
+	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
+	"golang.org/x/sync/errgroup"
 )
 
 func main() {
 	// read config
 	var cfg config.Config
 
-	err := cleanenv.ReadConfig("internal/config/config.yml", &cfg) // Local: internal/config/config.yml Docker: config.yml
+	err := cleanenv.ReadConfig("config.yml", &cfg) // Local: internal/config/config.yml Docker: config.yml
 	if err != nil {
 		log.Fatal().Err(err).Msg("error initializing config")
 	}
@@ -128,10 +132,47 @@ func main() {
 	noteController := controllers.NewApiNoteController(noteService, logger, validate)
 	httpecho.SetNoteRoutes(server.Server(), noteController, middlewareUser)
 
+	runner, ctx := errgroup.WithContext(ctx)
+
 	// start server
 	logger.Info().Msg("starting server")
+	runner.Go(func() error {
+		if err := server.Start(); err != nil {
+			logger.Fatal().Msgf("%v", err)
+		}
 
-	if err := server.Start(); err != nil {
-		logger.Fatal().Msgf("serverStart: %v", err)
+		return nil
+	})
+
+	runner.Go(func() error {
+		if err := ossignal.DefaultSignalWaiter(ctx); err != nil {
+			return errors.Wrap(err, "waiting os signal")
+		}
+
+		return nil
+	})
+
+	runner.Go(func() error {
+		<-ctx.Done()
+
+		ctxSignal, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+
+		defer cancel()
+
+		if err := server.Shutdown(ctxSignal); err != nil {
+			logger.Error().Err(err).Msg("shutdown http server")
+		}
+
+		return nil
+	})
+
+	if err := runner.Wait(); err != nil {
+		switch {
+		case ossignal.IsExitSignal(err):
+			logger.Info().Msg("exited by exit signal")
+		default:
+			logger.Fatal().Msgf("exiting with error: %v", err)
+		}
 	}
+
 }

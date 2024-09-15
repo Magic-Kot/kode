@@ -1,6 +1,7 @@
 package httpserver
 
 import (
+	"context"
 	"time"
 
 	"github.com/labstack/echo/v4"
@@ -42,4 +43,8 @@ func (s *Server) Start() error {
 
 func (s Server) Server() *echo.Echo {
 	return s.serv
+}
+
+func (s Server) Shutdown(ctx context.Context) error {
+	return s.serv.Shutdown(ctx)
 }
