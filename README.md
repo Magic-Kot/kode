@@ -13,11 +13,12 @@ If the application is launched for the first time, you need to apply migrations 
 
 ### Launching an application from docker-compose:
 - Edit in the config.yml file "server: host: "0.0.0.0"", "postgres: host: "postgresql"", "redis: host: "redis"";  
-- Select "main" in the file.go" reading configuration from "config.yml";  
-- `docker build -t kode .`  
+- Select "main" in the file.go" reading configuration from "config.yml";   
 - `docker compose -f docker-compose.yml up`  
 
 ## API
+
+The postman collection file is "Kode.postman_collection".
 
 1) User registration. Request Example:  
    `host:port`
