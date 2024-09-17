@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   app:
-    image: kode
-    container_name: kode-app
+    build: ./
+    command: ./app
     depends_on:
       - postgresql
       - redis
