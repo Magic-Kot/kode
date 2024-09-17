@@ -3,7 +3,7 @@
 ### Launching the application in Goland:
 - `docker run --name my-postgres -e POSTGRES_PASSWORD=12345 -p 5432:5432 -d postgres`  
 - `docker run -p 6379:6379 --name my-redis-stack redis/redis-stack:latest`  
-- Edit in the config.yml file "postgres: host: "127.0.0.1"", "redis: host: "127.0.0.1"";  
+- Edit in the config.yml file "server: host: "127.0.0.1"", "postgres: host: "127.0.0.1"", "redis: host: "127.0.0.1"";  
 - Select "main" in the file.go" reading configuration from "internal/config/config.yml";  
 - `go build cmd/main.go`  
 - `./main`  
@@ -12,7 +12,7 @@ If the application is launched for the first time, you need to apply migrations 
 `goose -dir . postgres "postgresql://postgres:12345@127.0.0.1:5432/postgres?sslmode=disable" up`
 
 ### Launching an application from docker-compose:
-- Edit in the config.yml file "postgres: host: "postgresql"", "redis: host: "redis"";  
+- Edit in the config.yml file "server: host: "0.0.0.0"", "postgres: host: "postgresql"", "redis: host: "redis"";  
 - Select "main" in the file.go" reading configuration from "config.yml";  
 - `docker build -t kode .`  
 - `docker compose -f docker-compose.yml up`  
