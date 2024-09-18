@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"embed"
 	"time"
 
 	"github.com/Magic-Kot/code/internal/config"
@@ -26,8 +27,12 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"
+	"github.com/speakeasy-api/goose/v3"
 	"golang.org/x/sync/errgroup"
 )
+
+//go:embed migrations/*.sql
+var embedMigrations embed.FS
 
 func main() {
 	// read config
@@ -79,6 +84,17 @@ func main() {
 	pool, err := postg.NewClient(ctx, &repo)
 	if err != nil {
 		logger.Fatal().Err(err).Msgf("NewClient: %s", err)
+	}
+
+	// migrations
+	goose.SetBaseFS(embedMigrations)
+
+	if err := goose.SetDialect("postgres"); err != nil {
+		panic(err)
+	}
+
+	if err := goose.Up(pool, "migrations"); err != nil {
+		panic(err)
 	}
 
 	// create client Redis for refresh tokens

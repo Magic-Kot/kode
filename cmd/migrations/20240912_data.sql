@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS users_notes
 
 -- +goose Down
 -- +goose StatementBegin
+DROP TABLE IF EXISTS users_notes;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS notes;
 -- +goose StatementEnd
