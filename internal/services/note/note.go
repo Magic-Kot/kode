@@ -4,8 +4,8 @@ import (
 	"context"
 	"strings"
 
-	"github.com/Magic-Kot/code/internal/models"
-	"github.com/Magic-Kot/code/pkg/speller"
+	"github.com/Magic-Kot/kode/internal/models"
+	"github.com/Magic-Kot/kode/pkg/speller"
 
 	"github.com/rs/zerolog"
 )

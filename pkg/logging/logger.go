@@ -1,9 +1,9 @@
 package logging
 
 import (
-	"github.com/pkg/errors"
 	"os"
 
+	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
 )
 

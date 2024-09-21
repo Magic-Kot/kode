@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Magic-Kot/code/internal/models"
-	"github.com/Magic-Kot/code/internal/services/note"
+	"github.com/Magic-Kot/kode/internal/models"
+	"github.com/Magic-Kot/kode/internal/services/note"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"

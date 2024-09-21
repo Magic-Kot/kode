@@ -5,8 +5,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/Magic-Kot/code/internal/models"
-	"github.com/Magic-Kot/code/internal/services/user"
+	"github.com/Magic-Kot/kode/internal/models"
+	"github.com/Magic-Kot/kode/internal/services/user"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 	"github.com/rs/zerolog"

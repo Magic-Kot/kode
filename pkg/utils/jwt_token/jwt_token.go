@@ -40,7 +40,7 @@ func NewTokenJWT(cfg *TokenJWTDeps) (*Manager, error) {
 	}, nil
 }
 
-// NewJWT - генерация JWT токена
+// NewJWT - generating a JWT token
 func (m *Manager) NewJWT(id string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
 		ExpiresAt: time.Now().Add(m.accessTokenTTL).Unix(),
@@ -51,7 +51,7 @@ func (m *Manager) NewJWT(id string) (string, error) {
 	return token.SignedString([]byte(m.signingKey))
 }
 
-// ParseToken - парсинг токена
+// ParseToken - token parsing
 func (m *Manager) ParseToken(accessToken string) (string, error) {
 	token, err := jwt.Parse(accessToken, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -71,7 +71,7 @@ func (m *Manager) ParseToken(accessToken string) (string, error) {
 	return claims["sub"].(string), nil
 }
 
-// NewRefreshToken - генерация Refresh токена
+// NewRefreshToken - generating a Refresh token
 func (m *Manager) NewRefreshToken(id string) string {
 	b := make([]byte, 32)
 

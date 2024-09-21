@@ -1,7 +1,7 @@
 package httpecho
 
 import (
-	"github.com/Magic-Kot/code/internal/controllers"
+	"github.com/Magic-Kot/kode/internal/controllers"
 
 	"github.com/labstack/echo/v4"
 )

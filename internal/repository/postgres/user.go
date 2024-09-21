@@ -6,8 +6,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/Magic-Kot/code/internal/models"
-	"github.com/Magic-Kot/code/pkg/client/postg"
+	"github.com/Magic-Kot/kode/internal/models"
+	"github.com/Magic-Kot/kode/pkg/client/postg"
 
 	"github.com/rs/zerolog"
 )
