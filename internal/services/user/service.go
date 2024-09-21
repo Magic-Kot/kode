@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Magic-Kot/code/internal/models"
-	"github.com/Magic-Kot/code/pkg/utils/hash"
+	"github.com/Magic-Kot/kode/internal/models"
+	"github.com/Magic-Kot/kode/pkg/utils/hash"
 
 	"github.com/rs/zerolog"
 )

@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Magic-Kot/code/internal/models"
-	"github.com/Magic-Kot/code/internal/services/auth"
+	"github.com/Magic-Kot/kode/internal/models"
+	"github.com/Magic-Kot/kode/internal/services/auth"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"

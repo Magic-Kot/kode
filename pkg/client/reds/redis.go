@@ -16,7 +16,7 @@ type ConfigDeps struct {
 	Database string
 }
 
-// NewClientRedis - создает клиента, подключаемый к базе данных по URL: reds://reds:12345@127.0.0.1:6379/reds
+// NewClientRedis - creates a client that connects to the database by URL: reds://reds:12345@127.0.0.1:6379/reds
 func NewClientRedis(ctx context.Context, cfg *ConfigDeps) (*redis.Client, error) {
 	logger := zerolog.Ctx(ctx)
 	logger.Info().Msg("creating a Redis client")

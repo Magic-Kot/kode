@@ -5,15 +5,10 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/Magic-Kot/code/internal/models"
-	"github.com/Magic-Kot/code/pkg/client/postg"
+	"github.com/Magic-Kot/kode/internal/models"
+	"github.com/Magic-Kot/kode/pkg/client/postg"
 
 	"github.com/rs/zerolog"
-)
-
-var (
-// errUserNotFound = errors.New("user not found")
-// errGetUser      = errors.New("failed to get user")
 )
 
 type AuthPostgresRepository struct {

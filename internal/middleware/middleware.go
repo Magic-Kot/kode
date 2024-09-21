@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/Magic-Kot/code/pkg/utils/jwt_token"
+	"github.com/Magic-Kot/kode/pkg/utils/jwt_token"
 
 	"github.com/labstack/echo/v4"
 	"github.com/rs/zerolog"

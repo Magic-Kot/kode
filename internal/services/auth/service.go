@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Magic-Kot/code/internal/models"
-	"github.com/Magic-Kot/code/pkg/utils/hash"
-	"github.com/Magic-Kot/code/pkg/utils/jwt_token"
+	"github.com/Magic-Kot/kode/internal/models"
+	"github.com/Magic-Kot/kode/pkg/utils/hash"
+	"github.com/Magic-Kot/kode/pkg/utils/jwt_token"
 
 	"github.com/rs/zerolog"
 )
@@ -18,10 +18,6 @@ import (
 var (
 	errAutorizationUser = errors.New("invalid refresh token")
 )
-
-//type UserRepository interface {
-//	CreateUser(ctx context.Context, login string, passwordHash string) (int, error)
-//}
 
 type AuthPostgresRepository interface {
 	SignIn(ctx context.Context, user *models.UserAuthorization) (*models.UserAuthorization, error)
@@ -34,7 +30,6 @@ type AuthRedisRepository interface {
 }
 
 type AuthService struct {
-	//UserRepository         UserRepository
 	AuthPostgresRepository AuthPostgresRepository
 	AuthRepository         AuthRedisRepository
 	token                  *jwt_token.Manager
@@ -42,27 +37,11 @@ type AuthService struct {
 
 func NewAuthService(authPostgresRepository AuthPostgresRepository, authRepository AuthRedisRepository, token *jwt_token.Manager) *AuthService {
 	return &AuthService{
-		//UserRepository:         UserRepository,
 		AuthPostgresRepository: authPostgresRepository,
 		AuthRepository:         authRepository,
 		token:                  token,
 	}
 }
-
-//// SignUp - registering a new user
-//func (s *AuthService) SignUp(ctx context.Context, login string, password string) (int, error) {
-//	logger := zerolog.Ctx(ctx)
-//	logger.Debug().Msg("starting the 'SignUp' service")
-//
-//	passwordHash := hash.GenerateHash(password)
-//
-//	id, err := s.UserRepository.CreateUser(ctx, login, passwordHash)
-//	if err != nil {
-//		return id, err
-//	}
-//
-//	return id, nil
-//}
 
 // SignIn - user authentication
 func (s *AuthService) SignIn(ctx context.Context, user *models.UserAuthorization) (models.Tokens, error) {
